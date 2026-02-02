@@ -6,301 +6,287 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 *{box-sizing:border-box}
-html,body{margin:0;height:100%;background:#020617;color:#22c55e;font-family:monospace}
+html,body{
+ margin:0;height:100%;
+ background:#020617;color:#22c55e;
+ font-family:monospace;
+}
 
-/* ===== MENU ===== */
-#menuBtn{position:fixed;top:10px;left:10px;font-size:26px;cursor:pointer;z-index:3000}
-.hide{display:none}
+/* TOP */
+#top{
+ height:44px;display:flex;align-items:center;
+ gap:10px;padding:0 12px;
+ border-bottom:2px solid #22c55e;font-weight:900
+}
+.circleBtn{
+ width:34px;height:34px;border-radius:50%;
+ display:flex;align-items:center;justify-content:center;
+ background:#022c22;border:2px solid #22c55e;
+ color:#22c55e;font-size:20px;cursor:pointer
+}
+#title{flex:1;text-align:center}
 
-/* ===== SIDE ===== */
+/* SIDE */
 #side{
  position:fixed;top:0;left:-260px;width:260px;height:100%;
  background:#000;border-right:2px solid #22c55e;
- padding:10px;transition:.35s;z-index:2500;
+ padding:12px;transition:.3s;z-index:5000;
  display:flex;flex-direction:column
 }
 #side.show{left:0}
-.sideBtn{padding:8px;margin:6px 0;border:1px solid #22c55e;border-radius:12px;cursor:pointer}
-.history{font-size:12px;color:#38bdf8;cursor:pointer;margin:4px 0}
-#closeSide{margin-top:auto;border:2px solid #ef4444;color:#ef4444;
- padding:8px;border-radius:12px;text-align:center;cursor:pointer}
-
-/* ===== NOTIFY ===== */
-#notify{
- position:fixed;top:-70px;left:50%;transform:translateX(-50%);
- background:#000;border:2px solid #22c55e;
- padding:10px 20px;border-radius:16px;
- font-weight:900;transition:.4s;z-index:5000
-}
-#notify.show{top:14px}
-.shake{animation:shake .3s}
-@keyframes shake{
- 0%,100%{transform:translateX(-50%)}
- 25%{transform:translateX(-56%)}
- 75%{transform:translateX(-44%)}
+.sideBtn{padding:10px;margin:6px 0;border:1px solid #22c55e;border-radius:12px}
+#closeSide{
+ margin-top:auto;border:2px solid #ef4444;
+ color:#ef4444;padding:10px;border-radius:12px;text-align:center
 }
 
-/* ===== TOP ===== */
-#top{
- height:44px;display:flex;justify-content:space-between;
- align-items:center;padding:0 14px 0 44px;
- border-bottom:2px solid #22c55e;font-weight:900
-}
-
-/* ===== MINI ===== */
+/* MINI */
 #mini{
  display:flex;gap:6px;padding:6px;
  border-bottom:2px solid #22c55e;font-size:11px
 }
-.mini{
- flex:1;border:1px solid #22c55e;
- border-radius:12px;padding:6px;
- text-align:center;cursor:pointer
-}
+.mini{flex:1;border:1px solid #22c55e;border-radius:12px;padding:6px;text-align:center}
 
-/* ===== MAIN ===== */
+/* MAIN */
 #main{height:calc(100vh - 76px);display:flex;flex-direction:column}
 #upper{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px}
 .box{border:2px solid #22c55e;border-radius:14px;padding:8px}
 
-/* ===== RADAR ===== */
+/* RADAR */
 #radar{
  width:160px;height:160px;margin:auto;
  border-radius:50%;border:2px solid #22c55e;
- position:relative;overflow:hidden
-}
-.grid{
- position:absolute;inset:0;
- background:
-  repeating-linear-gradient(#22c55e22 0 1px,transparent 1px 20px),
-  repeating-linear-gradient(90deg,#22c55e22 0 1px,transparent 1px 20px)
+ position:relative;overflow:hidden;
 }
 #scan{
  position:absolute;inset:0;
- background:conic-gradient(rgba(34,197,94,.4),transparent 70deg);
+ background:conic-gradient(rgba(34,197,94,.35),transparent 65deg);
  animation:spin 2s linear infinite
 }
 @keyframes spin{to{transform:rotate(360deg)}}
 .blip{
  position:absolute;width:6px;height:6px;
- background:#22c55e;border-radius:50%;
- animation:pulse 1.2s infinite
-}
-@keyframes pulse{
- 0%{transform:scale(1)}
- 50%{transform:scale(1.8)}
- 100%{transform:scale(1)}
+ background:#22c55e;border-radius:50%
 }
 
-/* ===== CHAT ===== */
-#chat{flex:1;display:flex;flex-direction:column;border-top:2px solid #22c55e}
-#messages{flex:1;overflow-y:auto;padding:8px}
+/* CHAT */
+#chat{flex:1;display:flex;flex-direction:column}
+#chatTitle{padding:6px 8px;border-bottom:1px solid #22c55e;font-size:12px}
+#messages{
+ flex:1;
+ overflow-y:auto;
+ padding:8px
+}
 .msg{
  margin:6px 0;padding:8px 10px;
- border:1px solid;border-radius:14px;max-width:82%
+ border:1px solid;border-radius:14px;
+ max-width:82%
 }
 .user{margin-left:auto;color:#38bdf8;border-color:#38bdf8}
 .bot{color:#22c55e;border-color:#22c55e}
 .warn{color:#ef4444;border-color:#ef4444}
 
-#bar{display:flex;gap:6px;padding:8px;border-top:2px solid #22c55e}
+/* BAR */
+#bar{
+ display:flex;gap:6px;padding:8px;
+ border-top:2px solid #22c55e;align-items:center
+}
 #text{
  flex:1;background:#020617;border:1px solid #22c55e;
  border-radius:16px;padding:10px;color:#fff
 }
-#send{width:42px;height:42px;border-radius:50%;
- border:2px solid #22c55e;background:#020617;color:#22c55e}
 
-/* ===== MODAL ===== */
+/* MODAL */
 .modal{
  position:fixed;inset:0;background:#000a;
- display:none;align-items:center;justify-content:center;z-index:6000
+ display:none;align-items:center;justify-content:center;
+ z-index:9000
 }
 .modal.show{display:flex}
 .modalBox{
  background:#000;border:2px solid #22c55e;
- border-radius:16px;padding:16px;width:80%;text-align:center
+ border-radius:16px;padding:16px;width:85%;
+ text-align:center
 }
-.modalBox button{
+.modalBox button,input{
  width:100%;margin:6px 0;padding:10px;
- border-radius:14px;border:2px solid #22c55e;
- background:#020617;color:#22c55e;font-weight:900
-}
-.modalBox input{
- width:100%;padding:10px;border-radius:14px;
- background:#020617;border:1px solid #22c55e;color:#fff
+ border-radius:14px;background:#020617;
+ border:2px solid #22c55e;color:#22c55e
 }
 </style>
 </head>
 
 <body>
 
-<div id="menuBtn" onclick="openSide()">👙</div>
-
+<!-- SIDE -->
 <div id="side">
- <div class="sideBtn" onclick="newChat()">phim sex mới</div>
- <div id="history"></div>
- <div id="closeSide" onclick="closeSide()">cút</div>
+ <div class="sideBtn" onclick="upgrade.classList.add('show')">Nâng cấp</div>
+ <div class="sideBtn" onclick="exchange.classList.add('show')">Đổi tiền</div>
+ <div id="closeSide" onclick="side.classList.remove('show')"> Đóng</div>
 </div>
 
-<div id="notify"></div>
-
+<!-- TOP -->
 <div id="top">
- <div>thành quả của cuộc ăn chơi của ChatGPT lỗi lõi lồn</div>
- <div id="ver">ChatGPT lồn nhỏ</div>
+ <div class="circleBtn" onclick="side.classList.toggle('show')">☰</div>
+ <div id="title">wed ChatGPT sửa lại</div>
+ <div id="ver">GPT 1.2</div>
 </div>
 
 <div id="mini">
- <div class="mini">tinh trùng <span id="point">0</span></div>
+ <div class="mini">điểm <span id="point">0</span></div>
  <div class="mini">₫ <span id="money">0</span></div>
- <div class="mini" onclick="openUpgrade()">NÂNG CẤP ĐÊ</div>
- <div class="mini" onclick="openExchange()">ĐỔI ĐIỂM ĐÊ</div>
 </div>
 
 <div id="main">
  <div id="upper">
   <div class="box">
-   <div id="radar">
-    <div class="grid"></div>
-    <div id="scan"></div>
-   </div>
+   📡 RADAR
+   <div id="radar"><div id="scan"></div></div>
   </div>
-  <div class="box">🩲 thông tin</div>
+  <div class="box">
+   thông tin
+   <div id="systemLog"></div>
+  </div>
  </div>
 
  <div id="chat">
+  <div id="chatTitle">CHAT cùng ChatGPT</div>
   <div id="messages"></div>
   <div id="bar">
-   <input id="text" placeholder=" sủa đê...">
-   <button id="send">lồn</button>
+   <div class="circleBtn" onclick="imgInput.click()">＋</div>
+   <input id="text" placeholder=" nói gì đi cu...">
+   <div class="circleBtn" id="send">➤</div>
+   <input id="imgInput" type="file" hidden>
   </div>
  </div>
 </div>
 
-<!-- MODALS -->
+<!-- UPGRADE -->
 <div id="upgrade" class="modal">
  <div class="modalBox">
-  <h3>NÂNG CẤP LỒN ChatGPT</h3>
-  <button onclick="('2.2',25)">GPT lồn nhỏ  25₫</button>
-  <button onclick="('3.2',50)">GPT lồn to     50₫</button>
-  <button onclick="('4.2',100)">GPT lồn vừa to vừa múp. 100₫</button>
-  <button onclick="('5.2',200)">GPT lồn to múp vú to 200₫</button>
-  <button onclick="closeModal('upgrade')">Cút</button>
+  <h3>NÂNG CẤP CHATGPT</h3>
+  <button onclick="buy('1.2',0)">GPT 1.2      FREEFIRE</button>
+  <button onclick="buy('2.2',20)">GPT 2.2  20₫</button>
+  <button onclick="buy('3.2',50)">GPT 3.2    50₫</button>
+  <button onclick="buy('4.2',100)">GPT 4.2. 100₫</button>
+  <button onclick="buy('5.2',200)">GPT 5.2   200₫</button>
+  <button onclick="upgrade.classList.remove('show')">Đóng</button>
  </div>
 </div>
 
+<!-- EXCHANGE -->
 <div id="exchange" class="modal">
  <div class="modalBox">
-  <h3>ĐỔI ĐIỂM</h3>
-  <input id="exVal" type="number" placeholder="Nhập điểm mẹ đê">
-  <button onclick="exchange()">Đổi</button>
-  <button onclick="closeModal('exchange')">cút</button>
+  <h3>ĐỔI ĐIỂM → ₫</h3>
+  <p>1 điểm = 5₫</p>
+  <input id="exVal" type="number" placeholder="Nhập số Điểm của cu em muốn đổi">
+  <button onclick="exchangePoint()">Đổi</button>
+  <button onclick="exchange.classList.remove('show')">Đóng</button>
  </div>
 </div>
 
 <script>
-const bad=["đm","đéo","cặc","lồn","cc","dkm","địt"];
-let chats=[],cur=0,point=0,money=0,aiVer="1.2";
-
 const messages=document.getElementById("messages");
-const history=document.getElementById("history");
-const notifyBox=document.getElementById("notify");
+const systemLog=document.getElementById("systemLog");
 const pointEl=document.getElementById("point");
 const moneyEl=document.getElementById("money");
+const text=document.getElementById("text");
+const send=document.getElementById("send");
+const imgInput=document.getElementById("imgInput");
 const verEl=document.getElementById("ver");
+const exVal=document.getElementById("exVal");
 
-function notify(t,err=false){
- notifyBox.textContent=t;
- notifyBox.classList.add("show");
- if(err) notifyBox.classList.add("shake");
- setTimeout(()=>notifyBox.classList.remove("show","shake"),2000);
+let point=0,money=0,ver="1.2";
+const badWords=["đm","đéo","cặc","lồn","dkm","địt","fuck","shit"];
+
+/* LOG – chỉ 5 dòng */
+function logSys(t){
+ let logs=systemLog.innerHTML.split("<br>").filter(Boolean);
+ logs.unshift("• "+t);
+ systemLog.innerHTML=logs.slice(0,5).join("<br>");
 }
 
-function openSide(){side.classList.add("show");menuBtn.classList.add("hide")}
-function closeSide(){side.classList.remove("show");menuBtn.classList.remove("hide")}
-
-function newChat(){
- chats.push([]);
- cur=chats.length-1;
- renderHistory();
- loadChat();
+/* TYPE */
+function typeText(el,text){
+ let i=0;
+ let timer=setInterval(()=>{
+  el.textContent+=text[i++];
+  if(i>=text.length) clearInterval(timer);
+ },30);
 }
 
-function renderHistory(){
- history.innerHTML="";
- chats.forEach((_,i)=>{
-  let d=document.createElement("div");
-  d.className="history";
-  d.textContent="• Chat "+(i+1);
-  d.onclick=()=>{cur=i;loadChat()};
-  history.appendChild(d);
- });
-}
+/* INIT */
+messages.innerHTML+=`<div class="msg bot">Xin chào! cu muốn kiếm tiền không chỉ cần tích điểm để đổi</div>`;
+logSys("Hệ thống kiếm tiền không uy tín khởi động");
 
-function loadChat(){
- messages.innerHTML="";
- chats[cur].forEach(m=>messages.innerHTML+=m);
- messages.scrollTop=messages.scrollHeight;
-}
-
+/* SEND */
 send.onclick=()=>{
- let v=text.value.trim();
- if(!v) return;
+ let v=text.value.trim(); if(!v)return;
  text.value="";
 
- if(bad.some(w=>v.toLowerCase().includes(w))){
-  messages.innerHTML+=`<div class="msg warn">⚠️ địt mẹ mày chửi đéo gì vào mà ăn/div>`;
-  notify("ám cha mẹ mày",true);
+ if(badWords.some(w=>v.toLowerCase().includes(w))){
+  point=Math.max(0,point-3);
+  pointEl.textContent=point;
+  messages.innerHTML+=`<div class="msg warn">⚠️ địt mẹ mày chửi tao à– trừ 3 điểm</div>`;
+  logSys(" địt cha mày @$%##$##");
   return;
  }
 
- point++; money+=2;
- pointEl.textContent=point;
- moneyEl.textContent=money;
-
- chats[cur].push(`<div class="msg user">${v}</div>`);
- loadChat();
+ messages.innerHTML+=`<div class="msg user">${v}</div>`;
+ let bot=document.createElement("div");
+ bot.className="msg bot";
+ bot.textContent=" ";
+ messages.appendChild(bot);
+ messages.scrollTop=messages.scrollHeight;
 
  setTimeout(()=>{
-  chats[cur].push(`<div class="msg bot"> con cặc ChatGPT lồn : nói cái địt mẹ mày sủa gì</div>`);
-  loadChat();
- },1200);
+  typeText(bot," bố mày bị điếc sủa ít kim tiền đi...");
+  money+=0; point++;
+  moneyEl.textContent=money;
+  pointEl.textContent=point;
+  logSys("+1 Điểm");
+ },2000);
 };
 
-function buy(ver,price){
- if(money<price) return notify("Đéo đủ tiền",true);
- money-=price; aiVer=ver;
- moneyEl.textContent=money;
- verEl.textContent="ChatGPT "+ver;
- notify("Đã nâng cấp "+ver);
- closeModal('upgrade');
-}
+/* IMAGE */
+imgInput.onchange=e=>{
+ let r=new FileReader();
+ r.onload=()=>{
+  messages.innerHTML+=`<div class="msg user"><img src="${r.result}" style="max-width:150px"></div>`;
+  logSys("Gửi ảnh");
+ };
+ r.readAsDataURL(e.target.files[0]);
+};
 
-function exchange(){
+/* ECON */
+function buy(v,p){
+ if(money<p)return alert("Không đủ tiền");
+ ver=v; money-=p;
+ verEl.textContent="GPT "+v;
+ moneyEl.textContent=money;
+ logSys("Nâng cấp GPT "+v);
+ upgrade.classList.remove("show");
+}
+function exchangePoint(){
  let v=+exVal.value;
- if(v<=0||v>point) return notify("Điểm Đéo hợp lệ",true);
+ if(v<=0||v>point)return;
  point-=v; money+=v*5;
  pointEl.textContent=point;
  moneyEl.textContent=money;
- notify("xuất tỉnh thành công");
- closeModal('exchange');
+ logSys("Đổi "+v+" Điểm → "+v*5+"₫");
+ exchange.classList.remove("show");
 }
 
-function openUpgrade(){upgrade.classList.add("show")}
-function openExchange(){exchange.classList.add("show")}
-function closeModal(id){document.getElementById(id).classList.remove("show")}
-
-/* radar blip */
+/* RADAR */
 setInterval(()=>{
  let b=document.createElement("div");
  b.className="blip";
  b.style.left=Math.random()*150+"px";
  b.style.top=Math.random()*150+"px";
  radar.appendChild(b);
- setTimeout(()=>b.remove(),1000);
-},600);
-
-newChat();
+ setTimeout(()=>b.remove(),800);
+},2000);
 </script>
+
 </body>
-</html>
+</html⁹>
